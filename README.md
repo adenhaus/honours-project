@@ -3,7 +3,7 @@
 
 ## Overview
 
-This is the repository for my undergraduate [honours project](http://www.drps.ed.ac.uk/20-21/dpt/cxinfr10044.htm) (AKA dissertation) which I completed in my fourth and final year of my BSc Computer Science at [The University of Edinburgh](https://www.ed.ac.uk/informatics). This research project, titled **"Improving Faithfulness of Multilingual Table-to-Text Natural Language Generation in African Languages"** aims to improve the faithfulness of multilingual Table-to-Text natural language generation by introducing intermediate text plans, or blueprints, comprised of question-answer pairs.
+This is the repository for my undergraduate [honours project](http://www.drps.ed.ac.uk/20-21/dpt/cxinfr10044.htm) (AKA dissertation) which I completed in my fourth and final year of my BSc Computer Science at [The University of Edinburgh](https://www.ed.ac.uk/informatics). This research project, titled **"Improving Faithfulness of Multilingual Table-to-Text Natural Language Generation in African Languages"** aims to improve the faithfulness of multilingual Table-to-Text Natural Language Generation by introducing intermediate text plans, or blueprints, comprised of question-answer pairs.
 
 ## Research inspiration
 
