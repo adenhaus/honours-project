@@ -19,9 +19,11 @@ Todo.
 
 The repository is organised as follows:
 
-- **`code/`**: This directory contains all the code related to the project. It includes the Jupyter notebooks I used to process the data and run evaluations (run in Google Colab), as well as Python scripts and Bash files, mostly for training Transformer models (run on my Edinburgh University's School of Informatics' [research cluster](https://computing.help.inf.ed.ac.uk/research-cluster)).
+- **`processing_notebooks/`**: This directory contains the Jupyter notebooks I used to process the data and run evaluations (run in Google Colab).
 
-- **`data/`**: Here, you can find the datasets used for experimentation. The dataset files are in CSV format, and each dataset is placed in a separate folder for clarity. These are derived from Google Research's [TaTA](https://github.com/google-research/url-nlp/tree/main/tata).
+- **`processing_notebooks/`**: This directory contains Python scripts and Bash files, mostly for training Transformer models (run on my Edinburgh University's School of Informatics' [research cluster](https://computing.help.inf.ed.ac.uk/research-cluster)).
+
+- **`datasets/`**: Here, you can find the datasets used for experimentation. The dataset files are in CSV format, and each dataset is placed in a separate folder for clarity. These are derived from Google Research's [TaTA](https://github.com/google-research/url-nlp/tree/main/tata).
 
 - **`hons-project.pdf`**: My write-up and submission.
 
