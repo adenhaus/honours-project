@@ -26,7 +26,7 @@ echo "hf activated"
 # ====================
 export SCRATCH_HOME=/disk/scratch/${USER}
 echo SCRATCH_HOME
-export DATA_HOME=${PWD}/../clean_csvs
+export DATA_HOME=${PWD}/../clean_csvs/eng_blueprints
 export DATA_SCRATCH=${SCRATCH_HOME}/data
 export MODEL_HOME=${PWD}/../models/mt5-small
 export MODEL_SCRATCH=${SCRATCH_HOME}/mt5-small
@@ -54,11 +54,10 @@ python train-mt5-small.py \
     --model_name_or_path ${MODEL_SCRATCH} \
     --do_train \
     --do_eval \
-    --train_file ${DATA_SCRATCH}/train.csv \
-    --validation_file ${DATA_SCRATCH}/dev.csv \
-    --test_file ${DATA_SCRATCH}/test.csv \
+    --train_file ${DATA_SCRATCH}/eng_blueprints_train.csv \
+    --validation_file ${DATA_SCRATCH}/eng_blueprints_dev.csv \
     --text_column linearized_input \
-    --summary_column target \
+    --summary_column blueprint_target \
     --output_dir ${OUTPUT_DIR} \
     --overwrite_output_dir True \
     --per_device_train_batch_size 4 \
@@ -74,9 +73,10 @@ python train-mt5-small.py \
     --lr_scheduler_type constant \
     --num_train_epochs 5 \
     --eval_steps 100 \
-    --logging_steps 100 \
-    --save_steps 100
+    --save_steps 100 \
+    --logging_steps 100
     # --save_strategy no
+    # --eval_steps 25
     # --weight_decay 0.01 \
     # --do_predict True \
 
@@ -106,6 +106,3 @@ rsync --archive --update --compress --progress ${OUTPUT_DIR} ${OUTPUT_HOME}
 # Finally we cleanup after ourselves by deleting what we created on /disk/scratch/
 # ====================
 rm -rf ${OUTPUT_DIR}
-
-
-echo "Job ${SLURM_JOB_ID} is done!"

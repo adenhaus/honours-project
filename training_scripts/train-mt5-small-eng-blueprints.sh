@@ -4,10 +4,10 @@
 #SBATCH -N 1	  # nodes requested
 #SBATCH -n 1	  # tasks requested
 #SBATCH --gres=gpu:a40  # number of GPUs
-#SBATCH --mem=128000  # memory in Mb
+#SBATCH --mem=128G  # memory in Mb
 #SBATCH --partition=PGR-Standard
 #SBATCH -t 12:00:00  # time requested in hour:minute:seconds
-#SBATCH --cpus-per-task=30  # number of cpus to use - there are 32 on each node.
+#SBATCH --cpus-per-task=28  # number of cpus to use - there are 32 on each node.
 
 set -e # fail fast
 
@@ -26,7 +26,7 @@ echo "hf activated"
 # ====================
 export SCRATCH_HOME=/disk/scratch/${USER}
 echo SCRATCH_HOME
-export DATA_HOME=${PWD}/../clean_csvs
+export DATA_HOME=${PWD}/../clean_csvs/blueprints
 export DATA_SCRATCH=${SCRATCH_HOME}/data
 export MODEL_HOME=${PWD}/../models/mt5-small
 export MODEL_SCRATCH=${SCRATCH_HOME}/mt5-small
@@ -54,11 +54,10 @@ python train-mt5-small.py \
     --model_name_or_path ${MODEL_SCRATCH} \
     --do_train \
     --do_eval \
-    --train_file ${DATA_SCRATCH}/train.csv \
-    --validation_file ${DATA_SCRATCH}/dev.csv \
-    --test_file ${DATA_SCRATCH}/test.csv \
+    --train_file ${DATA_SCRATCH}/train_eng_blueprints_final.csv \
+    --validation_file ${DATA_SCRATCH}/dev_eng_blueprints_final.csv \
     --text_column linearized_input \
-    --summary_column target \
+    --summary_column blueprint_target \
     --output_dir ${OUTPUT_DIR} \
     --overwrite_output_dir True \
     --per_device_train_batch_size 4 \
@@ -73,10 +72,11 @@ python train-mt5-small.py \
     --save_total_limit 1 \
     --lr_scheduler_type constant \
     --num_train_epochs 5 \
-    --eval_steps 100 \
-    --logging_steps 100 \
-    --save_steps 100
-    # --save_strategy no
+    --eval_steps 500 \
+    --save_steps 500 \
+    --logging_steps 500
+    # --test_file ${DATA_SCRATCH}/test.csv \
+    # --eval_steps 25
     # --weight_decay 0.01 \
     # --do_predict True \
 
@@ -105,7 +105,4 @@ rsync --archive --update --compress --progress ${OUTPUT_DIR} ${OUTPUT_HOME}
 # ====================
 # Finally we cleanup after ourselves by deleting what we created on /disk/scratch/
 # ====================
-rm -rf ${OUTPUT_DIR}
-
-
-echo "Job ${SLURM_JOB_ID} is done!"
+# rm -rf ${OUTPUT_DIR}

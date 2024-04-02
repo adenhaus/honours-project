@@ -28,11 +28,11 @@ export SCRATCH_HOME=/disk/scratch/${USER}
 echo SCRATCH_HOME
 export DATA_HOME=${PWD}/../clean_csvs
 export DATA_SCRATCH=${SCRATCH_HOME}/data
-export MODEL_HOME=${PWD}/../models/mt5-small
-export MODEL_SCRATCH=${SCRATCH_HOME}/mt5-small
+export MODEL_HOME=${PWD}/../models/mt5-large
+export MODEL_SCRATCH=${SCRATCH_HOME}/mt5-large
 echo "about to mkdir"
 mkdir -p ${SCRATCH_HOME}/data
-mkdir -p ${SCRATCH_HOME}/mt5-small
+mkdir -p ${SCRATCH_HOME}/mt5-large
 echo "mkdir done"
 rsync --archive --update --compress --progress ${DATA_HOME}/ ${DATA_SCRATCH}
 rsync --archive --update --compress --progress ${MODEL_HOME}/ ${MODEL_SCRATCH}
@@ -75,7 +75,8 @@ python train-mt5-small.py \
     --num_train_epochs 5 \
     --eval_steps 100 \
     --logging_steps 100 \
-    --save_steps 100
+    --save_steps 100 \
+    --weight_decay 0.001
     # --save_strategy no
     # --weight_decay 0.01 \
     # --do_predict True \
@@ -105,7 +106,4 @@ rsync --archive --update --compress --progress ${OUTPUT_DIR} ${OUTPUT_HOME}
 # ====================
 # Finally we cleanup after ourselves by deleting what we created on /disk/scratch/
 # ====================
-rm -rf ${OUTPUT_DIR}
-
-
-echo "Job ${SLURM_JOB_ID} is done!"
+# rm -rf ${OUTPUT_DIR}
