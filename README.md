@@ -1,5 +1,5 @@
 
-# Improving Faithfulness of Multilingual Table-to-Text NLG in African Languages
+# Multilingual Table-to-Text Generation with Question-Answer Plans
 
 ## Overview
 
@@ -19,38 +19,40 @@ The evidence suggests QA plans improve multilingual Table-to-Text outputs' factu
 
 The repository is organised as follows:
 
+- **`hons-project.pdf`**: My write-up and submission.
+
 - **`training_scripts/`**: This directory contains Python scripts and Bash files, mostly for training Transformer models (run on Edinburgh University's School of Informatics' [research cluster](https://computing.help.inf.ed.ac.uk/research-cluster)).
 
 - **`datasets/`**: Here, you can find the datasets used for experimentation. The dataset files are in CSV format, and each dataset is placed in a separate folder for clarity. These are derived from Google Research's [TaTA](https://github.com/google-research/url-nlp/tree/main/tata).
 
-- **`hons-project.pdf`**: My write-up and submission.
-
 - **`processing_notebooks/`**: This directory contains the Jupyter notebooks I used to process the data and run evaluations (run in Google Colab).
-
-  - `prediction_suite`: Uses finetuned models to generate a predictions file from the test set.
-  - `eval_suite`: Uses automatic metrics to evaluate model predictions.
-  - `BertScore`: Calculates the Pearson correlation of BERTScore with human evaluations on TaTA.
-  - `AddFullBlueprints`:
-  - `BlueprintFiller`:
-  - `BlueprintSimilarity`:
-  - `BlueprintStats`:
-  - `csv-length-checker`:
-  - `ExplodeRows`:
-  - `ExtractSplitsStata`:
-  - `FactKB`: Calculates the Pearson correlation of FactKB with human evaluations on TaTA.
-  - `google-trans`:
-  - `json_to_csv`:
-  - `LengthStats`:
-  - `MakeEnglishDataset`:
-  - `p_value`:
-  - `PearsonCorrelation`:
-  - `PlotStataLoss`:
-  - `QA-generator`:
-  - `SaveModel`:
-  - `SplitTestLangs`:
-  - `STATA`:
-  - `TranslateBlueprints`:
-  - ``:
+  - Evaluation:
+    - `prediction_suite`: Uses finetuned models to generate a predictions file from the test set.
+    - `eval_suite`: Uses automatic metrics to evaluate model predictions.
+  - Blueprint generator pipeline:
+    - `QA-generator`: Generates and heuristically filters QA pairs to create a blueprint for all English samples.
+    - `BlueprintFiller`: Extends blueprints generated on English samples to all other parallel samples (takes output of `QA-generator` as input).
+    - `TranslateBlueprints`: Translates blueprints into target langauges (takes output of `BlueprintFiller` as input).
+    - `AddFullBlueprints`: Combines blueprint and verbalisation into new target (takes output of `TranslateBlueprints` or `QA-generator` as input).
+  - Metric Pearson correlations:
+    - `BertScore`: Calculates the Pearson correlation of BERTScore with human evaluations on TaTA.
+    - `FactKB`: Calculates the Pearson correlation of FactKB with human evaluations on TaTA.
+    - `STATA`: Calculates the Pearson Correlation of the StATA on the test set.
+    - `p_value`: Calculates the Pearson correlation and p-value from a txt file os scores.
+  - Other preprocessing:
+    - `ExplodeRows`: Explodes rows in TaTA along each row's multiple references to increase the dataset size.
+    - `ExtractSplitsStata`: Randomly sample train/dev/test splits from the human annotations file.
+    - `json_to_csv`: Convert json files to csv files.
+    - `csv-length-checker`: Checks the length of csv files.
+    - `SplitTestLangs`: Split the test set into individual languages.
+    - `MakeEnglishDataset`: Removes non-English examples from the dataset to create an English subset.
+    - `SaveModel`: Download model from HF and save it locally.
+  - Dataset stats:
+    - `BlueprintSimilarity`: Calculates BLEU and chrF similarity between tables, blueprints and verbalisations.
+    - `BlueprintStats`: Calculates statistics about QA blueprints like the average number of QA pairs in a blueprint.
+    - `google-trans`: Calculate how well Google Translate performs on the dataset.
+    - `LengthStats`: Calculates lengths of topkenised inputs and references in the datasets.
+    - `PlotStataLoss`: Plot loss curves.
 
 ## Using the models
 
