@@ -89,4 +89,4 @@ Follow these steps to get started with running the code for project:
 
 ## Acknowledgments
 
-I would like to express my gratitude to my supervisor, [Mirella Lapata](https://scholar.google.co.uk/citations?user=j67B9Q4AAAAJ&hl=en) for her guidance and support throughout the course of this project.
+I would like to express my gratitude to my supervisor, [Mirella Lapata](https://scholar.google.co.uk/citations?user=j67B9Q4AAAAJ&hl=en) for her guidance and support throughout the course of this project; [Sebastian Ruder](https://scholar.google.com/citations?user=8ONXPV8AAAAJ&hl=en), one of the authors of the TaTA dataset, who gave me some valuable pointers while we were both at Google; and [Tom Sherborne](https://scholar.google.com/citations?user=50nZ2yAAAAAJ&hl=en), who helped me a great deal with technical questions.
