@@ -19,21 +19,6 @@ tokenizer.add_tokens(extra_token)
 model = MT5ForConditionalGeneration.from_pretrained("/disk/scratch/s2029717/mt5-xl")
 model.resize_token_embeddings(len(tokenizer))  # Extra token
 
-
-# def preprocess_function(examples):
-#     # Convert labels to floats
-#     examples["labels"] = [[float(label)] for label in examples["attributable"]]
-
-#     # Tokenize the 'linearized_input' column
-#     model_inputs = tokenizer(examples["linearized_input"], padding="max_length", truncation=True)
-#     examples["input"] = examples.pop("linearized_input")  
-
-#     # Add model inputs from the tokenizer  
-#     examples.update(model_inputs)
-
-#     return examples
-
-
 def preprocess_function(examples):
     sources = examples['full_input']
     targets = examples['attributable']
@@ -69,31 +54,13 @@ class RegressionTrainer(Seq2SeqTrainer):
         logits_processor = RegressionLogitsProcessor(tokenizer.get_vocab()[extra_token])
         regression_logits = logits_processor(inputs.input_ids, logits)
 
-        # print(regression_logits.squeeze(-1))
-        # print(regression_logits.dtype)
-        # print(labels.squeeze(-1))
-        # print(labels.dtype)
-
-        # print('Logits')
-        # print(regression_logits.shape)
-        # print('Labels')
-        # print(labels.shape)
-
         loss_fct = torch.nn.MSELoss()
 
-        # if not self.model.training:
-        #     print(labels.shape)
-        #     print(regression_logits.shape)
-
-        loss = loss_fct(regression_logits.squeeze(-1), labels.squeeze(-1))  # reshape instead of squeeze
+        loss = loss_fct(regression_logits.squeeze(-1), labels.squeeze(-1))
 
         rmse = torch.sqrt(loss)
-        
-        # print(loss)
-        # print(loss.dtype)
 
         return (rmse, outputs) if return_outputs else rmse
-        # return loss
 
 
 data_collator = DataCollatorForSeq2Seq(tokenizer=tokenizer, model=model, max_length=2048)

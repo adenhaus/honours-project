@@ -44,12 +44,6 @@ echo "Creating directory to save model weights"
 export OUTPUT_DIR=${SCRATCH_HOME}/output
 mkdir -p ${OUTPUT_DIR}
 
-# This script runs the training
-# python train-mt5-small.py \
-# 	--data_path=${DATA_SCRATCH} \
-# 	--model_path=${MODEL_SCRATCH} \
-# 	--output_dir=${OUTPUT_DIR}
-
 python train-mt5-small.py \
     --model_name_or_path ${MODEL_SCRATCH} \
     --do_train \
@@ -74,25 +68,6 @@ python train-mt5-small.py \
     --num_train_epochs 3 \
     --eval_steps 200 \
     --save_steps 200
-    # --test_file ${DATA_SCRATCH}/test.csv \
-    # --eval_steps 25
-    # --weight_decay 0.01 \
-    # --do_predict True \
-
-# python -m torch.distributed.launch \
-#     --nproc_per_node 2 train-mt5-small.py \
-#       --model_name_or_path ${MODEL_SCRATCH} \
-#       --do_train True \
-#       --do_eval True \
-#       --train_file ${DATA_SCRATCH}/train.csv \
-#       --validation_file ${DATA_SCRATCH}/dev.csv \
-#       --test_file ${DATA_SCRATCH}/test.csv \
-#       --text_column linearized_input \
-#       --summary_column target \
-#       --output_dir ${DATA_SCRATCH}/output \
-#       --per_device_train_batch_size=8 \
-#       --per_device_eval_batch_size=8 \
-#       --predict_with_generate True
 
 # ====================
 # RSYNC data from /disk/scratch/ to /home/. This moves everything we want back onto the distributed file system

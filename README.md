@@ -25,7 +25,7 @@ The repository is organised as follows:
 
 - **`datasets/`**: Here, you can find the datasets used for experimentation. The dataset files are in CSV format, and each dataset is placed in a separate folder for clarity. These are derived from Google Research's [TaTA](https://github.com/google-research/url-nlp/tree/main/tata).
 
-- **`processing_notebooks/`**: This directory contains the Jupyter notebooks I used to process the data and run evaluations (run in Google Colab).
+- **`data_processing_notebooks/`**: This directory contains the Jupyter notebooks I used to process the data and run evaluations (run in Google Colab).
   - Evaluation:
     - `prediction_suite`: Uses finetuned models to generate a predictions file from the test set.
     - `eval_suite`: Uses automatic metrics to evaluate model predictions.

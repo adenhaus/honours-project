@@ -3,7 +3,7 @@
 #SBATCH -e /home/%u/slogs/sl_%A.out
 #SBATCH -N 1	  # nodes requested
 #SBATCH -n 1	  # tasks requested
-#SBATCH --gres=gpu:a40:3  # number of GPUs
+#SBATCH --gres=gpu:a40  # number of GPUs
 #SBATCH --mem=128G  # memory in Mb
 #SBATCH --partition=PGR-Standard
 #SBATCH -t 72:00:00  # time requested in hour:minute:seconds
@@ -44,46 +44,9 @@ echo "Creating directory to save model weights"
 export OUTPUT_DIR=${SCRATCH_HOME}/output-stata
 mkdir -p ${OUTPUT_DIR}
 
-# python train-mt5-small.py \
-#     --model_name_or_path ${MODEL_SCRATCH} \
-#     --do_train True \
-#     --do_eval True \
-#     --train_file ${DATA_SCRATCH}/train.csv \
-#     --validation_file ${DATA_SCRATCH}/dev.csv \
-#     --test_file ${DATA_SCRATCH}/test.csv \
-#     --text_column linearized_input \
-#     --summary_column target \
-#     --output_dir ${OUTPUT_DIR} \
-#     --overwrite_output_dir True \
-#     --per_device_train_batch_size 4 \
-#     --per_device_eval_batch_size 4 \
-#     --predict_with_generate True \
-#     --learning_rate 0.001 \
-#     --eval_accumulation_steps 1 \
-#     --max_source_length 512 \
-#     --max_target_length 128 \
-#     --load_best_model_at_end True \
-#     --evaluation_strategy steps \
-    # --eval_steps 25
+# torchrun --nproc_per_node 3 train-stata-new.py
 
-# python train-stata-new.py
-
-torchrun --nproc_per_node 3 train-stata-new.py
-
-# python -m torch.distributed.launch \
-#     --nproc_per_node 2 train-mt5-small.py \
-#       --model_name_or_path ${MODEL_SCRATCH} \
-#       --do_train True \
-#       --do_eval True \
-#       --train_file ${DATA_SCRATCH}/train.csv \
-#       --validation_file ${DATA_SCRATCH}/dev.csv \
-#       --test_file ${DATA_SCRATCH}/test.csv \
-#       --text_column linearized_input \
-#       --summary_column target \
-#       --output_dir ${DATA_SCRATCH}/output \
-#       --per_device_train_batch_size=8 \
-#       --per_device_eval_batch_size=8 \
-#       --predict_with_generate True
+python train-stata-new.py
 
 # ====================
 # RSYNC data from /disk/scratch/ to /home/. This moves everything we want back onto the distributed file system
