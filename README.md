@@ -21,6 +21,8 @@ The repository is organised as follows:
 
 - **`hons-project.pdf`**: My write-up and submission.
 
+- - **`hons-project-short.pdf`**: A shortened version of the report in ACL style.
+
 - **`training_scripts/`**: This directory contains Python scripts and Bash files, mostly for training Transformer models (run on Edinburgh University's School of Informatics' [research cluster](https://computing.help.inf.ed.ac.uk/research-cluster)).
 
 - **`datasets/`**: Here, you can find the datasets used for experimentation. The dataset files are in CSV format, and each dataset is placed in a separate folder for clarity. These are derived from Google Research's [TaTA](https://github.com/google-research/url-nlp/tree/main/tata).
