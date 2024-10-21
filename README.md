@@ -58,7 +58,7 @@ The repository is organised as follows:
 
 ## Using the models
 
-The best-performing fine-tuned model is publicly available on my [🤗 Hugging Face profile](https://huggingface.co/adenhaus). You can use it with the [🤗 Transformers](https://huggingface.co/docs/hub/transformers) library:
+The fine-tuned models are publicly available on my [🤗 Hugging Face profile](https://huggingface.co/adenhaus). You can use them with the [🤗 Transformers](https://huggingface.co/docs/hub/transformers) library:
 
 ```python
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
@@ -66,6 +66,10 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 tokenizer = AutoTokenizer.from_pretrained("adenhaus/mt5-large-tata")
 model = AutoModelForSeq2SeqLM.from_pretrained("adenhaus/mt5-large-tata")
 ```
+
+## The learned metric StATA
+
+I reproduce the learned metric proposed in the [original paper](https://aclanthology.org/2023.findings-emnlp.118/), StATA, and make it publicly available, also on [🤗 Hugging Face](https://huggingface.co/adenhaus/mt5-large-stata).
 
 ## Running the code
 
