@@ -21,7 +21,7 @@ The repository is organised as follows:
 
 - **`hons-project.pdf`**: My write-up and submission.
 
-- - **`hons-project-short.pdf`**: A shortened version of the report in ACL style.
+- **`hons-project-short.pdf`**: A shortened version of the report in ACL style.
 
 - **`training_scripts/`**: This directory contains Python scripts and Bash files, mostly for training Transformer models (run on Edinburgh University's School of Informatics' [research cluster](https://computing.help.inf.ed.ac.uk/research-cluster)).
 
