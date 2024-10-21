@@ -13,7 +13,7 @@ This project builds mainly upon these two papers:
 
 ## Results summary
 
-The results show QA plans improve the factuality of Table-to-Text outputs in English, but do not result in similar gains in the multilingual setting. This is due to A) innacuriacies in machine translating the QA plans, generated in English, into the target languages, and B) the models struggling to rely heavily on the blueprints they generate. A detailed analysis of this is conducted in the project.
+The results show QA plans improve the factuality of Table-to-Text outputs in English, but do not result in similar gains in the multilingual setting. This is due to A) innacuracies in machine translating the QA plans, generated in English, into the target languages, and B) the models struggling to rely heavily on the blueprints they generate. A detailed analysis of this is conducted in the project.
 
 ## Project Structure
 
